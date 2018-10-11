@@ -1,0 +1,30 @@
+version = 6
+CPU 0 is empty
+CPU 3 is empty
+CPU 6 is empty
+CPU 7 is empty
+cpus=8
+          ffmpeg-13073 [004] 15356.381635: i915_request_queue:   dev=0, hw_id=48, ring=2, ctx=107, seqno=1, flags=0x0
+          ffmpeg-13073 [004] 15356.381646: i915_request_add:     dev=0, hw_id=48, ring=2, ctx=107, seqno=1, global=0
+          ffmpeg-13073 [004] 15356.381649: i915_request_submit:  dev=0, hw_id=48, ring=2, ctx=107, seqno=1, global=0
+          ffmpeg-13073 [004] 15356.381652: i915_request_execute: dev=0, hw_id=48, ring=2, ctx=107, seqno=1, global=5057
+          ffmpeg-13073 [004] 15356.381653: i915_request_in:      dev=0, hw_id=48, ring=2, ctx=107, seqno=1, prio=0, global=5057, port=0
+          <idle>-0     [005] 15356.381848: i915_request_out:     dev=0, hw_id=48, ring=2, ctx=107, seqno=1, global=5057, completed?=1
+          ffmpeg-13074 [002] 15356.382195: i915_request_queue:   dev=0, hw_id=48, ring=2, ctx=107, seqno=2, flags=0x0
+          ffmpeg-13074 [002] 15356.382205: i915_request_add:     dev=0, hw_id=48, ring=2, ctx=107, seqno=2, global=0
+          ffmpeg-13074 [002] 15356.382206: i915_request_submit:  dev=0, hw_id=48, ring=2, ctx=107, seqno=2, global=0
+          ffmpeg-13074 [002] 15356.382208: i915_request_execute: dev=0, hw_id=48, ring=2, ctx=107, seqno=2, global=5058
+          ffmpeg-13074 [002] 15356.382209: i915_request_in:      dev=0, hw_id=48, ring=2, ctx=107, seqno=2, prio=0, global=5058, port=0
+          <idle>-0     [005] 15356.382431: i915_request_out:     dev=0, hw_id=48, ring=2, ctx=107, seqno=2, global=5058, completed?=1
+          ffmpeg-13072 [001] 15356.389845: i915_request_queue:   dev=0, hw_id=46, ring=0, ctx=108, seqno=1, flags=0x0
+          ffmpeg-13072 [001] 15356.389860: i915_request_add:     dev=0, hw_id=46, ring=0, ctx=108, seqno=1, global=0
+          ffmpeg-13072 [001] 15356.389862: i915_request_submit:  dev=0, hw_id=46, ring=0, ctx=108, seqno=1, global=0
+          ffmpeg-13072 [001] 15356.389867: i915_request_execute: dev=0, hw_id=46, ring=0, ctx=108, seqno=1, global=96172
+          ffmpeg-13072 [001] 15356.389867: i915_request_in:      dev=0, hw_id=46, ring=0, ctx=108, seqno=1, prio=0, global=96172, port=0
+          <idle>-0     [005] 15356.390210: i915_request_out:     dev=0, hw_id=46, ring=0, ctx=108, seqno=1, global=96172, completed?=1
+          ffmpeg-13072 [001] 15356.390605: i915_request_queue:   dev=0, hw_id=46, ring=0, ctx=108, seqno=2, flags=0x0
+          ffmpeg-13072 [001] 15356.390608: i915_request_add:     dev=0, hw_id=46, ring=0, ctx=108, seqno=2, global=0
+          ffmpeg-13072 [001] 15356.390610: i915_request_submit:  dev=0, hw_id=46, ring=0, ctx=108, seqno=2, global=0
+          ffmpeg-13072 [001] 15356.390612: i915_request_execute: dev=0, hw_id=46, ring=0, ctx=108, seqno=2, global=96173
+          ffmpeg-13072 [001] 15356.390612: i915_request_in:      dev=0, hw_id=46, ring=0, ctx=108, seqno=2, prio=0, global=96173, port=0
+          <idle>-0     [005] 15356.390837: i915_request_out:     dev=0, hw_id=46, ring=0, ctx=108, seqno=2, global=96173, completed?=1
