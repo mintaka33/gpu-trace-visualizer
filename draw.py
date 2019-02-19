@@ -1,12 +1,12 @@
 import svgwrite
 from svgwrite import cm, mm
 
-dwg = svgwrite.Drawing(filename='time.svg', size=('100cm', '10000cm'), debug=True)
+dwg = svgwrite.Drawing(filename='time.svg', size=('100cm', '1000cm'), debug=True)
 shapes = dwg.add(dwg.g(id='shapes', fill='red'))
 text = dwg.add(dwg.g(font_size=14))
 
-def drawItem(data, i):
-    basey = 20 + data[0]
+def drawItem(data, i, offset):
+    basey = 20 + data[0] - offset
     height = (data[1]-data[0])
     text.add(dwg.text(str(i), (80*mm, basey*mm)))
     shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='blue', stroke='red', stroke_width=1))
@@ -37,7 +37,7 @@ def getTiming(line):
     return [int(idx), tag, int(ret)]
 
 def readData(data):
-    with open('log.txt') as f:
+    with open('mpeg2vldemo-trace.txt') as f:
         tag = 'ring=2'
         for line in f:
             if tag in line:
@@ -70,8 +70,10 @@ def parseTrace(time):
 time = {}
 parseTrace(time)
 
-i = 0
-for t in time:
-    drawItem(t, i)
-    i = i + 1
+keys = list(time.keys())
+keys.sort()
+offset = time[keys[0]][0]
+for k in keys:
+    drawItem(time[k], k, offset)
+
 dwg.save()
