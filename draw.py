@@ -1,26 +1,26 @@
 import svgwrite
 from svgwrite import cm, mm
 
-dwg = svgwrite.Drawing(filename='time.svg', size=('10000cm', '10cm'), debug=True)
+dwg = svgwrite.Drawing(filename='time.svg', size=('100cm', '10000cm'), debug=True)
 shapes = dwg.add(dwg.g(id='shapes', fill='red'))
 
 def drawItem(data):
-    basex = data[0]
-    width = (data[1]-data[0])
-    shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='blue', stroke='red', stroke_width=1))
-    basex = basex + width
-    width = (data[2]-data[1])
-    shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='blue', stroke='red', stroke_width=1))
-    basex = basex + width
-    width = (data[3]-data[2])
-    shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='blue', stroke='red', stroke_width=1))
-    basex = basex + width
-    width = (data[4]-data[3])
-    shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='blue', stroke='red', stroke_width=1))
-    basex = basex + width
-    width = (data[5]-data[4])
-    shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='green', stroke='red', stroke_width=1))
-    basex = basex + width
+    basey = data[0]
+    height = (data[1]-data[0])
+    shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='blue', stroke='red', stroke_width=1))
+    basey = basey + height
+    height = (data[2]-data[1])
+    shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='blue', stroke='red', stroke_width=1))
+    basey = basey + height
+    height = (data[3]-data[2])
+    shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='blue', stroke='red', stroke_width=1))
+    basey = basey + height
+    height = (data[4]-data[3])
+    shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='blue', stroke='red', stroke_width=1))
+    basey = basey + height
+    height = (data[5]-data[4])
+    shapes.add(dwg.rect(insert=(100*mm, basey*mm), size=(10*mm, height*mm), fill='green', stroke='red', stroke_width=1))
+    basey = basey + height
 
 def getTiming(line):
         ret = '0'
