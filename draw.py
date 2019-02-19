@@ -22,13 +22,24 @@ def drawItem(data):
     shapes.add(dwg.rect(insert=(basex*mm, 10*mm), size=(width*mm, 1*mm), fill='green', stroke='red', stroke_width=1))
     basex = basex + width
 
-base = 157473
+def getTiming(line):
+        ret = '0'
+        l = line.split(' ')
+        for w in l:
+            if ":" in w and "." in w:
+                ret = ''.join(w.split(':')[0].split('.'))
+        return int(ret)
+
 data = []
-with open('time.txt') as f:
+with open('mpeg2vldemo-trace.txt') as f:
+    base = 0
+    tag = 'ring=2'
     for line in f:
-        a = int(line) - base
-        data.append(a)
-#print(data)
+        if tag in line:
+            a = getTiming(line)
+            if base == 0:
+                base = a
+            data.append(a-base)
 
 time = []
 count = 0
@@ -39,7 +50,6 @@ for d in data:
     if count%6 == 0:
         time.append(group)
         group = []
-#print(time)
 
 for t in time:
     print(t)
