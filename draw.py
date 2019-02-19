@@ -45,33 +45,29 @@ def readData(data):
                 data.append(a)
 
 def formatData(data, data2):
-    curIdx = data[0][0]
-    group = [curIdx, 0, 0, 0, 0, 0, 0]
     for frame in data:
-        if curIdx == frame[0]:
-             if frame[1] == "i915_request_queue":
-                group[1] = frame[2]
-             elif frame[1] == "i915_request_add":
-                group[2] = frame[2]
-             elif frame[1] == "i915_request_submit":
-                group[3] = frame[2]
-             elif frame[1] == "i915_request_execute":
-                group[4] = frame[2]
-             elif frame[1] == "i915_request_in":
-                group[5] = frame[2]
-             elif frame[1] == "i915_request_out":
-                group[6] = frame[2]
-        else:
-            data2.append(group)
-            curIdx = frame[0]
-            group = [curIdx, 0, 0, 0, 0, 0, 0]
+        seqno = frame[0]
+        if seqno not in data2:
+            data2[seqno] = [0, 0, 0, 0, 0, 0]
+        if frame[1] == "i915_request_queue":
+            data2[seqno][0] = frame[2]
+        elif frame[1] == "i915_request_add":
+            data2[seqno][1] = frame[2]
+        elif frame[1] == "i915_request_submit":
+            data2[seqno][2] = frame[2]
+        elif frame[1] == "i915_request_execute":
+            data2[seqno][3] = frame[2]
+        elif frame[1] == "i915_request_in":
+            data2[seqno][4] = frame[2]
+        elif frame[1] == "i915_request_out":
+            data2[seqno][5] = frame[2]
 
 def parseTrace(time):
     data = []
     readData(data)
     formatData(data, time)
 
-time = []
+time = {}
 parseTrace(time)
 
 i = 0
