@@ -4,6 +4,11 @@ from svgwrite import cm, mm
 dwg = svgwrite.Drawing(filename='time.svg', size=('100cm', '3000cm'), debug=True)
 shapes = dwg.add(dwg.g(id='shapes', fill='red'))
 text = dwg.add(dwg.g(font_size=14))
+hlines = dwg.add(dwg.g(id='hlines', stroke='blue'))
+
+def drawLine():
+    for y in range(100):
+        hlines.add(dwg.line(start=(2*cm, (2+y*100)*cm), end=(40*cm, (2+y*100)*cm)))
 
 def drawItem(data, i, offset):
     basey = 20 + data[0] - offset
@@ -70,6 +75,8 @@ def parseTrace(time):
 
 time = {}
 parseTrace(time)
+
+drawLine()
 
 keys = list(time.keys())
 keys.sort()
