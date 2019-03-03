@@ -1,28 +1,35 @@
 import svgwrite
 from svgwrite import cm, mm
 
-dwg = svgwrite.Drawing(filename='visual.svg', size=('100cm', '1000cm'), debug=True)
+(baseX, baseY, stepX, stepY) = (2, 2, 2, 10)
+(numH, numV) = (100, 16)
+(lineOffsetX, lineOffsetY) = (baseX + 6, baseY-0.5)
+(endX, endY) = (lineOffsetX+numV*stepX, lineOffsetY+numH*stepY)
+(svgWidth, svgHeigh) = (endX+2, endY+2)
+
+dwg = svgwrite.Drawing(filename='visual.svg', size=(svgWidth*cm, svgHeigh*cm), debug=True)
 shapes = dwg.add(dwg.g(id='shapes', fill='red'))
 text = dwg.add(dwg.g(font_size=14))
 hlines = dwg.add(dwg.g(id='hlines', stroke='blue'))
 
-def drawLineX():
-    for y in range(100):
-        text.add(dwg.text(str(y), (1*cm, (2+y*10)*cm)))
-        hlines.add(dwg.line(start=(2*cm, (2+y*10)*cm), end=(40*cm, (2+y*10)*cm)))
+def drawLineH():
+    for y in range(numH):
+        text.add(dwg.text(str(y), ((baseX/2)*cm, (baseY+y*stepY)*cm)))
+        hlines.add(dwg.line(start=(baseX*cm, (baseY+y*stepY)*cm), end=(endX*cm, (baseY+y*stepY)*cm)))
 
-def drawLineY():
-    for x in range(16):
-        text.add(dwg.text('engine'+str(x), ((7.5+x*2)*cm, 1*cm)))
-        hlines.add(dwg.line(start=((8+x*2)*cm, 1*cm), end=((8+x*2)*cm, 1000*cm)))
+def drawLineV():
+    for x in range(numV):
+        text.add(dwg.text('engine'+str(x), (((lineOffsetX-0.5)+x*stepX)*cm, lineOffsetY*cm)))
+        hlines.add(dwg.line(start=((lineOffsetX+x*stepX)*cm, lineOffsetY*cm), end=((lineOffsetX+x*stepX)*cm, endY*cm)))
 
-def drawItem():
-    for y in range(100):
-        for x in range(16):
-            shapes.add(dwg.rect(insert=((8+x*2)*cm, (3+y*10)*cm), size=(1*cm, 4*cm), fill='blue', stroke='red', stroke_width=1))
+def drawRect():
+    (rectOffsetY, rectSizeH, rectSizeV) = (3, 1, 4)
+    for y in range(numH):
+        for x in range(numV):
+            shapes.add(dwg.rect(insert=((lineOffsetX+x*stepX)*cm, (lineOffsetY+rectOffsetY+y*stepY)*cm), size=(rectSizeH*cm, rectSizeV*cm), fill='blue', stroke='red', stroke_width=1))
 
-drawLineX()
-drawLineY()
-drawItem()
+drawLineH()
+drawLineV()
+drawRect()
 
 dwg.save()
