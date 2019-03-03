@@ -1,9 +1,10 @@
 import svgwrite
 from svgwrite import cm, mm
+from random import randint
 
 (baseX, baseY, stepX, stepY) = (2, 2, 2, 10)
 (numH, numV) = (100, 16)
-(lineOffsetX, lineOffsetY) = (baseX + 6, baseY-0.5)
+(lineOffsetX, lineOffsetY) = (baseX + 4, baseY-0.5)
 (endX, endY) = (lineOffsetX+numV*stepX, lineOffsetY+numH*stepY)
 (svgWidth, svgHeigh) = (endX+2, endY+2)
 
@@ -22,14 +23,32 @@ def drawLineV():
         text.add(dwg.text('engine'+str(x), (((lineOffsetX-0.5)+x*stepX)*cm, lineOffsetY*cm)))
         hlines.add(dwg.line(start=((lineOffsetX+x*stepX)*cm, lineOffsetY*cm), end=((lineOffsetX+x*stepX)*cm, endY*cm)))
 
-def drawRect():
-    (rectOffsetY, rectSizeH, rectSizeV) = (3, 1, 4)
+def drawRect(startX, startY, sizeX, sizeY):
+    shapes.add(dwg.rect(insert=(startX*cm, startY*cm), size=(sizeX*cm, sizeY*cm), fill='blue', stroke='red', stroke_width=1))
+
+def drawRectTest():
+    (rectOffsetY, rectSizeY) = (3, 4)
     for y in range(numH):
         for x in range(numV):
-            shapes.add(dwg.rect(insert=((lineOffsetX+x*stepX)*cm, (lineOffsetY+rectOffsetY+y*stepY)*cm), size=(rectSizeH*cm, rectSizeV*cm), fill='blue', stroke='red', stroke_width=1))
+            drawRect(lineOffsetX+x*stepX, lineOffsetY+rectOffsetY+y*stepY, 1, rectSizeY)
+
+def drawOneEngine(n, data):
+    for d in data:
+        drawRect(lineOffsetX+n*stepX+d[0], baseY+d[1], d[2], d[3])
+
+def generateData(data):
+    for i in range(numH):
+        rect = (0, randint(0, 5)+i*stepY, 1, randint(1, 5))
+        data.append(rect)
 
 drawLineH()
 drawLineV()
-drawRect()
+
+#drawRectTest()
+
+for n in range(numV):
+    data=[]
+    generateData(data)
+    drawOneEngine(n, data)
 
 dwg.save()
